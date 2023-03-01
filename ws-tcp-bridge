@@ -19,7 +19,7 @@ function initSocketCallbacks(state,ws,s) {
 
 	function flushSocketBuffer() {
 		if(state.sBuffer.length > 0) {
-			s.write(Buffer.concat(state.sBuffer));
+			s.write(state.sBuffer[0]);
 		}
 		state.sBuffer = null;
 	};
@@ -74,7 +74,7 @@ function initSocketCallbacks(state,ws,s) {
 		if(! state.wsReady) {
 			state.wsBuffer.push(data);
 		} else {
-			ws.send(data,{binary: true,mask: wsMask});
+			ws.send(data.toString());
 		}
 	});
 
